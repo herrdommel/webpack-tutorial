@@ -1,4 +1,3 @@
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = async (env, options) => {
@@ -7,7 +6,7 @@ module.exports = async (env, options) => {
         entry: {
             index: './src/index.js',
         },
-        devtool: dev ? 'inline-source-map' : 'source-map',
+        devtool: dev ? 'eval-cheap-module-source-map' : 'source-map',
         devServer: {
             static: './dist',
             compress: true,
@@ -16,12 +15,10 @@ module.exports = async (env, options) => {
         },
         plugins: [
             new HtmlWebpackPlugin({
-                title: 'Caching',
+                title: 'Build Performance',
             }),
         ],
         output: {
-            filename: '[name].[contenthash].js',
-            path: path.resolve(__dirname, 'dist'),
             clean: true,
         },
         optimization: {
